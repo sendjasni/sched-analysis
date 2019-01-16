@@ -40,52 +40,6 @@ public class TaskSet {
     }
 
     /*
-     * Compute the task set's Hyper period
-     * */
-
-    public static int ComputeHyperPeriod(ArrayList<Task> ts) {
-        int i, tmp, hyper = 0;
-
-        if (ts.size() == 2)
-            return PPCM(ts.get(0).getT(), ts.get(1).getT());
-
-        for (i = 0; i < ts.size() - 2; i++) {
-            tmp = PPCM(ts.get(i).getT(), ts.get(i + 1).getT());
-            hyper = PPCM(tmp, ts.get(i + 2).getT());
-        }
-        return hyper;
-    }
-
-    /*
-     * Compute the PGCD
-     * */
-
-    public static int PGCD(int a, int b) {
-        int value_1, value_2, modulo;
-        value_1 = a;
-        value_2 = b;
-        if (b > a) {
-            value_1 = b;
-            value_2 = a;
-        }
-        modulo = value_1 % value_2;
-        while (modulo != 0) {
-            value_1 = value_2;
-            value_2 = modulo;
-            modulo = value_1 % value_2;
-        }
-        return value_2;
-    }
-
-    /*
-     *   Compute the PPCM
-     * */
-    public static int PPCM(int a, int b) {
-        int pgcd = PGCD(a, b);
-        return (a * b) / pgcd;
-    }
-
-    /*
      *  Sort task set by deadlines
      * */
     public static void SortByDeadLines(ArrayList<Task> ts) {
